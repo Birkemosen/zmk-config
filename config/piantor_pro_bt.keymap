@@ -1,127 +1,416 @@
-/*
- * Copyright (c) 2020 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
-
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/rgb.h>
 
 / {
     chosen {
         zmk,physical-layout = &default_layout;
     };
-};
 
-/ {
+    macros {
+        // Danish characters using Unicode sequences
+        ae_macro: ae_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp RA(Z)>;  // AltGr+Z for æ
+        };
+        
+        oe_macro: oe_macro {
+            compatible = "zmk,behavior-macro"; 
+            #binding-cells = <0>;
+            bindings = <&kp RA(L)>;  // AltGr+L for ø
+        };
+        
+        aa_macro: aa_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>; 
+            bindings = <&kp RA(W)>;  // AltGr+W for å
+        };
+        
+        euro_macro: euro_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp RA(E)>;  // AltGr+E for €
+        };
+        
+        pound_macro: pound_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp RA(N3)>; // AltGr+3 for £
+        };
+
+        // Danish keyboard specific brackets and symbols
+        kp_dk_LBKT: kp_dk_LBKT { // this is a macro for writting "[" on danish keyboards.
+            label = "kp_dk_LBKT";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp RALT>
+                , <&macro_tap &kp N8>
+                , <&macro_release &kp RALT>
+                ;
+        };
+        
+        kp_dk_RBKT: kp_dk_RBKT { // this is a macro for writting "]" on danish keyboards.
+            label = "kp_dk_RBKT";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp RALT>
+                , <&macro_tap &kp N9>
+                , <&macro_release &kp RALT>
+                ;
+        };
+        
+        kp_dk_LBRC: kp_dk_LBRC { // this is a macro for writting "{" on danish keyboards.
+            label = "kp_dk_LBRC";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp RALT>
+                , <&macro_tap &kp N7>
+                , <&macro_release &kp RALT>
+                ;
+        };
+        
+        kp_dk_RBRC: kp_dk_RBRC { // this is a macro for writting "}" on danish keyboards.
+            label = "kp_dk_RBRC";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp RALT>
+                , <&macro_tap &kp N0>
+                , <&macro_release &kp RALT>
+                ;
+        };
+        
+        kp_dk_BLSH: kp_dk_BLSH { // this is a macro for writting "\" on danish keyboards.
+            label = "kp_dk_BLSH";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp RALT>
+                , <&macro_tap &kp NON_US_BACKSLASH>
+                , <&macro_release &kp RALT>
+                ;
+        };
+        
+        kp_dk_PIPE: kp_dk_PIPE { // this is a macro for writting "|" on danish keyboards.
+            label = "kp_dk_PIPE";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp RALT>
+                , <&macro_tap &kp EQUAL>
+                , <&macro_release &kp RALT>
+                ;
+        };
+        
+        kp_dk_UNDER: kp_dk_UNDER { // this is a macro for writting "_" on danish keyboards.
+            label = "kp_dk_UNDER";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LSHIFT>
+                , <&macro_tap &kp FSLH>
+                , <&macro_release &kp LSHIFT>
+                ;
+        };
+
+        // System shortcuts
+        copy: copy { // this is a macro for copying
+            label = "copy";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LCTRL>
+                , <&macro_tap &kp C>
+                , <&macro_release &kp LCTRL>
+                ;
+        };
+        
+        dk_paste: dk_paste { // this is a macro for pasting
+            label = "dk_paste";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LCTRL>
+                , <&macro_tap &kp V>
+                , <&macro_release &kp LCTRL>
+                ;
+        };
+        
+        del_word: del_word { // this is a macro for utilising the delete word functionality on windows
+            label = "del_word";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LCTRL>
+                , <&macro_tap &kp BACKSPACE>
+                , <&macro_release &kp LCTRL>
+                ;
+        };
+
+        // macOS/Windows navigation shortcuts
+        mod_left: mod_left { // this is a macro for window management left
+            label = "mod_left";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LGUI>
+                , <&macro_tap &kp LEFT>
+                , <&macro_release &kp LGUI>
+                ;
+        };
+        
+        mod_up: mod_up { // this is a macro for window management up
+            label = "mod_up";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LGUI>
+                , <&macro_tap &kp UP>
+                , <&macro_release &kp LGUI>
+                ;
+        };
+        
+        mod_right: mod_right { // this is a macro for window management right
+            label = "mod_right";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LGUI>
+                , <&macro_tap &kp RIGHT>
+                , <&macro_release &kp LGUI>
+                ;
+        };
+        
+        mod_down: mod_down { // this is a macro for window management down
+            label = "mod_down";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LGUI>
+                , <&macro_tap &kp DOWN>
+                , <&macro_release &kp LGUI>
+                ;
+        };
+    };
+
+    behaviors {
+        // Space as navigation layer when held
+        nav_space: nav_space {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+            flavor = "balanced";
+            bindings = <&mo>, <&kp>;
+            // All 42 physical key positions may trigger a hold
+            hold-trigger-key-positions = <0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41>;
+            hold-trigger-on-release;
+        };
+
+        // One-shot Shift in the thumb cluster
+        os_shift: os_shift {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+            flavor = "balanced";
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41>;
+            hold-trigger-on-release;
+        };
+
+        // Tab/Symbol layer when held
+        tab_sym: tab_sym {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&kp>;
+            hold-trigger-key-positions = <0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41>;
+        };
+
+        // Return/Function layer when held
+        ret_fn: ret_fn {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&kp>;
+            hold-trigger-key-positions = <0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41>;
+        };
+
+        // Delete/Symbol layer when held
+        del_sym: del_sym {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&kp>;
+            hold-trigger-key-positions = <0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
+        // =====================================================================
         default_layer {
-            display-name = "QWERTY";
-            // --------------------------------------------------------------------------------
-            // |  TAB |  Q  |  W  |  E  |  R  |  T  |  Y  |  U   |  I  |  O  |  P  | BSPC |
-            // | CTRL |  A  |  S  |  D  |  F  |  G  |  H  |  J   |  K  |  L  |  ;  |  '   |
-            // | SHFT |  Z  |  X  |  C  |  V  |  B  |  N  |  M   |  ,  |  .  |  /  | ESC  |
-            //                    | GUI | LWR | SPC | ENT | RSE  | ALT |
+            display-name = "Anymak36:Base";
+
+            // Core 36 keys = columns 2-6 on each half (marked with *)
+            // Outer columns 1 and 12 = nice-to-have only (marked with !)
+            // ------------------------------------------------------------------------------------------------------------
+            //                       Left Hand (6)                                 Right Hand (6)
+            // Top:   ! ESC ! *  Q * *  K * *  O * *  U * *  Y *     *  V * *  D * *  C * *  L * *  F * ! Vol+!
+            //        -----------------------------------------------     -----------------------------------------------
+            // Middle:! TAB ! *  H * *  A * *  E * *  I * *  , *     *  G * *  T * *  R * *  N * *  S * ! Vol-!
+            //        -----------------------------------------------     -----------------------------------------------
+            // Bottom:! GRV ! *  - * *  Z * *  ' * *  . * *  X *     *  B * *  P * *  M * *  W * *  J * ! Play!
+            //        -----------------------------------------------     -----------------------------------------------
+            // Thumb:                    * NUM * * SPC/NAV * * SHF *   * DEL * * ENT * * BSPC *
+            //                           ------------------------------------
+            // ------------------------------------------------------------------------------------------------------------
+
             bindings = <
-                &kp TAB   &kp Q &kp W &kp E &kp R &kp T &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-                &kp LCTRL &kp A &kp S &kp D &kp F &kp G &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-                &kp LSHFT &kp Z &kp X &kp C &kp V &kp B &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp ESC
-                               &kp LGUI &mo 1 &kp SPACE &kp RET &mo 2 &kp RALT
+                /* --------------------------- TOP ROW --------------------------- */
+                &kp ESCAPE       &kp Q           &kp K           &kp O            &kp U             &kp Y
+                &kp V            &kp D           &kp C           &kp L            &kp F             &kp C_VOLUME_UP
+
+                /* -------------------------- MIDDLE ROW ------------------------ */
+                &tab_sym 2 TAB   &kp H           &kp A           &kp E            &kp I             &kp COMMA
+                &kp G            &kp T           &kp R           &kp N            &kp S             &kp C_VOLUME_DOWN
+
+                /* -------------------------- BOTTOM ROW ------------------------ */
+                &kp GRAVE        &kp MINUS       &mt LEFT_GUI Z  &mt LEFT_ALT SINGLE_QUOTE &mt LCTRL PERIOD &kp X
+                &kp B            &mt RCTRL P     &mt RIGHT_ALT M &mt RIGHT_GUI W  &kp J             &kp C_PLAY_PAUSE
+
+                /* -------------------------- THUMB ROW ------------------------- */
+                &mo 1            &nav_space 3 SPACE              &os_shift LEFT_SHIFT LEFT_SHIFT
+                &del_sym 2 DEL   &ret_fn 4 RET                   &kp BSPC
             >;
         };
 
-        lower_layer {
+        // =====================================================================
+        number_layer {
             display-name = "NUMBER";
-            // -----------------------------------------------------------------------------------------
-            // |  TAB |  1  |  2  |  3  |  4  |  5    |  6  |  7  |  8  |  9  |  0  | BSPC |
-            // | CTRL | BT1 | BT2 | BT3 | BT4 | BT5   | LFT | DWN |  UP | RGT |     |      |
-            // | SHFT | BTCR| RGB | RST | BOOT| Unlock|     |     |     |     |     |      |
-            //                    | GUI |     | SPC   | ENT |     | ALT |
+
+            // Core 36: Numbers 1-0, F-keys optimized for ergonomics and flow
+            // ------------------------------------------------------------------------------------------------------------
+            //                       Left Hand                                       Right Hand
+            // Top:    ! TAB ! *  1 * *  2 * *  3 * *  4 * *  5 *     *  6 * *  7 * *  8 * *  9 * *  0 * !BSPC!
+            //         -----------------------------------------------     -----------------------------------------------
+            // Middle: !     ! *  + * *  - * *  / * *  * * *  F6*     * F7 * *  ( * *  ) * *  [ * *  ] * !     !
+            //         -----------------------------------------------     -----------------------------------------------
+            // Bottom: ! BT0 ! *  F1* *  F2* *  F3* *  F4* *  F5*     *  F8* *  F9* * F10* * F11* * F12* !BTCLR!
+            //         -----------------------------------------------     -----------------------------------------------
+            // Thumb:                    * NUM * * SPC/NAV * * SHF *   * DEL * * ENT * * BSPC *
+            // ------------------------------------------------------------------------------------------------------------
+
             bindings = <
-                &kp TAB   &kp N1       &kp N2          &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
-                &kp LCTRL &bt BT_SEL 0 &bt BT_SEL 1    &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-                &kp LSHFT &bt BT_CLR   &rgb_ug RGB_TOG &sys_reset   &bootloader  &studio_unlock &trans   &trans   &trans &trans    &trans &trans
-                                                       &kp LGUI     &trans       &kp SPACE      &kp LGUI &trans   &kp SPACE
+                /* TOP */
+                &kp TAB          &kp N1  &kp N2  &kp N3  &kp N4  &kp N5   &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp BSPC
+                /* MID */
+                &trans           &kp PLUS &kp MINUS &kp SLASH &kp ASTRK &kp F6   &kp F7  &kp LPAR &kp RPAR &kp LBKT &kp RBKT &trans
+                /* BOT */
+                &bt BT_SEL 0     &kp F1  &kp F2  &kp F3  &kp F4  &kp F5   &kp F8  &kp F9  &kp F10 &kp F11 &kp F12 &bt BT_CLR
+                /* THM */
+                &trans           &nav_space 3 SPACE &os_shift LEFT_SHIFT LEFT_SHIFT &del_sym 2 DEL &kp RET &kp BSPC
             >;
         };
 
-        raise_layer {
+        // =====================================================================
+        symbol_layer {
             display-name = "SYMBOL";
-            // -----------------------------------------------------------------------------------------
-            // |  TAB |  !  |  @  |  #  |  $  |  %  |  ^  |  &  |  *  |  (  |  )  | BSPC |
-            // | CTRL |     |     |     |     |     |  -  |  =  |  [  |  ]  |  \  |  `   |
-            // | SHFT |     |     |     |     |     |  _  |  +  |  {  |  }  | "|" |  ~   |
-            //                    | GUI |     | SPC | ENT |     | ALT |
+
+            // Core 36: Braces on home row, brackets in consistent positions with number layer
+            // ------------------------------------------------------------------------------------------------------------
+            //                       Left Hand                                       Right Hand
+            // Top:    ! TAB ! *  ! * *  @ * *  # * *  $ * *  % *     *  ^ * *  & * *  * * *  _ * *  ~ * !BSPC!
+            //         -----------------------------------------------     -----------------------------------------------
+            // Middle: !     ! *  Æ * *  Ø * *  Å * *  € * *  £ *     *  = * *  ( * *  ) * *  [ * *  ] * !     !
+            //         -----------------------------------------------     -----------------------------------------------
+            // Bottom: ! ESC ! *  ` * *  | * *  \ * *  + * *  < *     *  > * *  { * *  } * *  ? * *  / * ! ESC !
+            //         -----------------------------------------------     -----------------------------------------------
+            // Thumb:                    * NUM * * SPC/NAV * * SHF *   * DEL * * ENT * * BSPC *
+            // ------------------------------------------------------------------------------------------------------------
+
             bindings = <
-                &kp  TAB  &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT  &kp CARET &kp AMPS &kp ASTRK &kp LPAR &kp RPAR &kp BSPC
-                &kp LCTRL &trans   &trans &trans   &trans   &trans     &kp MINUS &kp EQUAL &kp LBKT &kp RBKT &kp BSLH &kp GRAVE
-                &kp LSHFT &trans   &trans &trans   &trans   &trans     &kp UNDER &kp PLUS  &kp LBRC &kp RBRC &kp PIPE &kp TILDE
-                                          &kp LGUI &trans   &kp SPACE  &kp RET   &trans    &kp RALT
+                /* TOP */
+                &kp TAB          &kp EXCL &kp AT  &kp HASH &kp DLLR &kp PRCNT &kp CARET &kp AMPS &kp ASTRK &kp UNDER &kp TILDE &kp BSPC
+                /* MID */
+                &trans           &ae_macro &oe_macro &aa_macro &euro_macro &pound_macro &kp EQUAL &kp LPAR &kp RPAR &kp_dk_LBKT &kp_dk_RBKT &trans
+                /* BOT */
+                &kp ESC          &kp GRAVE &kp_dk_PIPE &kp_dk_BLSH &kp PLUS &kp LT &kp GT &kp_dk_LBRC &kp_dk_RBRC &kp QMARK &kp SLASH &kp ESC
+                /* THM */
+                &mo 1            &nav_space 3 SPACE &os_shift LEFT_SHIFT LEFT_SHIFT &del_sym 2 DEL &kp RET &kp BSPC
             >;
         };
 
-        extra_layer_1 {
-            display-name = "EXTRA 1";
+        // =====================================================================
+        nav_layer {
+            display-name = "NAV";
+
+            // Core 36: Optimized arrow placement, cut/copy/paste, navigation
+            // Arrow keys in optimal right-hand position similar to vim/wellum
+            // ------------------------------------------------------------------------------------------------------------
+            //                       Left Hand                                       Right Hand
+            // Top:    !REDO! * UNDO* * CUT * *COPY * *PAST* * APP*     *PGUP* *HOME* * UP * * END* *PGDN* !     !
+            //         -----------------------------------------------     -----------------------------------------------
+            // Middle: !     ! * GUI * * ALT* * CTL* * SFT* * TAB*     * INS* *LEFT* *DOWN* *RGHT* *WDEL* !     !
+            //         -----------------------------------------------     -----------------------------------------------
+            // Bottom: ! BRW-! * ESC * * CSA* * CTB* * CBK* * CFW*     *CAPS* *CL←ֿ * * DEL* * CR→* * END* ! BRW+!
+            //         -----------------------------------------------     -----------------------------------------------  
+            // Thumb:                    * NUM * * SPC/NAV * * SHF *   * DEL * * ENT * * BSPC *
+            // ------------------------------------------------------------------------------------------------------------
+
             bindings = <
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                                     &trans &trans &trans  &trans &trans &trans       
+                /* TOP */
+                &kp K_REDO       &kp K_UNDO &kp K_CUT &copy &dk_paste &kp K_APP   &kp PG_UP &kp HOME &kp UP &kp END &kp PG_DN &trans
+                /* MID */
+                &trans           &kp LGUI &kp LALT &kp LCTRL &kp LSHFT &kp TAB   &kp INS &kp LEFT &kp DOWN &kp RIGHT &del_word &trans
+                /* BOT */
+                &kp K_BACK       &kp ESC &kp LC(LS(A)) &kp LC(TAB) &kp LC(LS(TAB)) &kp LC(W)   &kp CAPS &kp LC(LEFT) &kp DEL &kp LC(RIGHT) &kp K_FORWARD &kp K_FORWARD
+                /* THM */
+                &mo 1            &nav_space 3 SPACE &os_shift LEFT_SHIFT LEFT_SHIFT &del_sym 2 DEL &kp RET &kp BSPC
             >;
         };
 
-        extra_layer_2 {
-            display-name = "EXTRA 2";
-            bindings = <
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                                     &trans &trans &trans  &trans &trans &trans       
-            >;
-        };
+        // =====================================================================
+        function_layer {
+            display-name = "FUNCTION";
 
-        extra_layer_3 {
-            display-name = "EXTRA 3";
-            bindings = <
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                                     &trans &trans &trans  &trans &trans &trans       
-            >;
-        };
+            // Optional 4th layer for advanced functions, system controls
+            // Access via combo or additional thumb key if needed
+            // ------------------------------------------------------------------------------------------------------------
+            //                       Left Hand                                       Right Hand
+            // Top:    !RESET! * BT0* * BT1* * BT2* * BT3* * BT4*     *RGBT* *RGBI* *RGBD* *RGBH* *RGBS* !BOOT !
+            //         -----------------------------------------------     -----------------------------------------------
+            // Middle: !     ! *     * *    * *    * *    * *    *     *    * *    * *    * *    * *    * !     !
+            //         -----------------------------------------------     -----------------------------------------------
+            // Bottom: !     ! *     * *    * *    * *    * *    *     *    * *    * *    * *    * *    * !     !
+            //         -----------------------------------------------     -----------------------------------------------
+            // Thumb:                    * NUM * * SPC/NAV * * SHF *   * DEL * * ENT * * BSPC *
+            // ------------------------------------------------------------------------------------------------------------
 
-        extra_layer_4 {
-            display-name = "EXTRA 4";
             bindings = <
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                                     &trans &trans &trans  &trans &trans &trans       
-            >;
-        };
-
-        extra_layer_5 {
-            display-name = "EXTRA 5";
-            bindings = <
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                                     &trans &trans &trans  &trans &trans &trans       
-            >;
-        };
-
-        extra_layer_6 {
-            display-name = "EXTRA 6";
-            bindings = <
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans  &trans &trans &trans &trans &trans &trans
-                                     &trans &trans &trans  &trans &trans &trans       
+                /* TOP */
+                &sys_reset       &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4
+                                   &rgb_ug RGB_TOG &rgb_ug RGB_BRI &rgb_ug RGB_BRD &rgb_ug RGB_HUI &rgb_ug RGB_SAI &bootloader
+                /* MID */
+                &trans           &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans &trans
+                /* BOT */
+                &trans           &studio_unlock &trans &trans &trans &trans   &trans &trans &trans &trans &trans &trans
+                /* THM */
+                &mo 1            &nav_space 3 SPACE &os_shift LEFT_SHIFT LEFT_SHIFT &del_sym 2 DEL &kp RET &kp BSPC
             >;
         };
     };
-};
+}; 
