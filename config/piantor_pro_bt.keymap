@@ -334,7 +334,7 @@
 
                 /* -------------------------- THUMB ROW ------------------------- */
                 &kp LGUI         &kp E                           &kp LSHFT
-                &kp LCTRL        &meh_spc LC(LA(LSHFT)) SPACE    &kp &bspc_del          
+                &kp LCTRL        &meh_spc LC(LA(LSHFT)) SPACE    &bspc_del          
             >;
         };
 
