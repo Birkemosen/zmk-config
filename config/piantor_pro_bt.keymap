@@ -406,7 +406,7 @@
                 /* TOP */
                 &kp K_REDO       &kp K_UNDO &kp K_CUT &copy &dk_paste &kp K_APP   &kp PG_UP &kp HOME &kp END &kp PG_DN &kp &del_word &trans
                 /* MID */
-                &trans           &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT &kp TAB   &kp INS &kp LEFT &kp UP &kp DOWN &kp RIGHT &trans
+                &trans           &mkp MOVE_LEFT &mkp MOVE_DOWN &mkp MOVE_UP &mkp MOVE_RIGHT &kp TAB   &kp INS &kp LEFT &kp UP &kp DOWN &kp RIGHT &trans
                 /* BOT */
                 &kp K_BACK       &mkp LCLK &mkp RCLK &mkp MCLK &msc SCRL_UP &msc SCRL_DOWN   &kp CAPS &kp LC(LEFT) &kp DEL &kp LC(RIGHT) &kp END &kp K_FORWARD
                 /* THM */
