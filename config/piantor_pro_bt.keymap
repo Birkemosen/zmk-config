@@ -246,8 +246,8 @@
             hold-trigger-key-positions = <0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41>;
         };
 
-        // Delete/Symbol layer when held
-        del_sym: del_sym {
+        // Return/Symbol layer when held
+        ret_sym: ret_sym {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
@@ -270,13 +270,13 @@
             // Aptmak Blue layout optimized for multilingual typing
             // ------------------------------------------------------------------------------------------------------------
             //                       Left Hand (6)                                 Right Hand (6)
-            // Top:   ! ESC ! *  Q * *  J * *  U * *  L * * SEMI*     *  B * *  P * *  F * *  W * *  X * ! Vol+!
-            //        -----------------------------------------------     -----------------------------------------------
-            // Middle:! TAB ! *  A * *  O * *  I * *  N * *  Y *     *  K * *  H * *  T * *  S * *  R * ! Vol-!
-            //        -----------------------------------------------     -----------------------------------------------
-            // Bottom:! GRV ! *  Z * * DOT * * COMMA* *  M * *  V *     *  D * *  G * *  C * * FSLH* *APOS* ! Play!
-            //        -----------------------------------------------     -----------------------------------------------
-            // Thumb:                    * NUM * * E/NAV * * SHF *   * BSPC * * SPC * * DEL *
+            // Top:   ! ESC ! * Q * * J * * U * *  L * *  ; *     * B * * P * * F * * W * * X * ! Vol+!
+            //        ---------------------------------------     -----------------------------------------------
+            // Middle:! TAB ! * A * * O * * I * *  N * *  Y *     * K * * H * * T * * S * * R * ! Vol-!
+            //        ---------------------------------------     -----------------------------------------------
+            // Bottom:! GRV ! * Z * * . * * , * *  M * *  V *     * D * * G * * C * * / * * ' * ! Play!
+            //        ---------------------------------------     -----------------------------------------------
+            // Thumb:                    * NUM * * E/NAV * * SHF *   * BSPC * * SPC * * RET *
             //                           ------------------------------------
             // Note: E moved to left thumb as recommended by Aptmak Blue design
             // ------------------------------------------------------------------------------------------------------------
@@ -296,7 +296,7 @@
 
                 /* -------------------------- THUMB ROW ------------------------- */
                 &mo 1            &nav_e 3 E                      &os_shift LEFT_SHIFT LEFT_SHIFT
-                &kp BSPC         &spc_fn 4 SPACE                 &del_sym 2 DEL          
+                &kp BSPC         &spc_fn 4 SPACE                 &ret_sym 2 RET          
             >;
         };
 
@@ -324,7 +324,7 @@
                 /* BOT */
                 &bt BT_SEL 0     &kp F1  &kp F2  &kp F3  &kp F4  &kp F5   &kp F8  &kp F9  &kp F10 &kp F11 &kp F12 &bt BT_CLR
                 /* THM */
-                &trans           &nav_e 3 SPACE &os_shift LEFT_SHIFT LEFT_SHIFT &kp BSPC &kp RET &del_sym 2 DEL
+                &trans           &nav_e 3 SPACE &os_shift LEFT_SHIFT LEFT_SHIFT &kp BSPC &kp DEL &ret_sym 2 RET
             >;
         };
 
@@ -352,7 +352,7 @@
                 /* BOT */
                 &kp ESC          &kp GRAVE &kp_dk_PIPE &kp_dk_BLSH &kp PLUS &kp LT &kp GT &kp_dk_LBRC &kp_dk_RBRC &kp QMARK &kp SLASH &kp ESC
                 /* THM */
-                &mo 1            &nav_e 3 SPACE &os_shift LEFT_SHIFT LEFT_SHIFT &kp BSPC &kp RET &del_sym 2 DEL
+                &mo 1            &nav_e 3 SPACE &os_shift LEFT_SHIFT LEFT_SHIFT &kp BSPC &kp DEL &ret_sym 2 RET
             >;
         };
 
@@ -381,7 +381,7 @@
                 /* BOT */
                 &kp K_BACK       &kp ESC &kp LC(LS(A)) &kp LC(TAB) &kp LC(LS(TAB)) &kp LC(W)   &kp CAPS &kp LC(LEFT) &kp DEL &kp LC(RIGHT) &kp K_FORWARD &kp K_FORWARD
                 /* THM */
-                &mo 1            &nav_e 3 SPACE &os_shift LEFT_SHIFT LEFT_SHIFT &kp BSPC &kp RET &del_sym 2 DEL
+                &mo 1            &nav_e 3 SPACE &os_shift LEFT_SHIFT LEFT_SHIFT &kp BSPC &kp RET &ret_sym 2 RET
             >;
         };
 
@@ -411,7 +411,7 @@
                 /* BOT */
                 &trans           &studio_unlock &trans &trans &trans &trans   &trans &trans &trans &trans &trans &trans
                 /* THM */
-                &mo 1            &nav_e 3 SPACE &os_shift LEFT_SHIFT LEFT_SHIFT &kp BSPC &kp RET &del_sym 2 DEL
+                &mo 1            &nav_e 3 SPACE &os_shift LEFT_SHIFT LEFT_SHIFT &kp BSPC &kp DEL &ret_sym 2 RET
             >;
         };
     };
