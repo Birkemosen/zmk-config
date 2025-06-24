@@ -281,7 +281,7 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&kp C_VOLUME_UP>, <&kp C_VOLUME_DOWN>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
+            mods = <0x03>;
         };
     };
 
@@ -395,7 +395,7 @@
             //                       Left Hand                                       Right Hand
             // Top:    !REDO! * UNDO* * CUT * *COPY * *PAST* * APP*     *PGUP* *HOME* * END * * PGDN * *WDEL* !     !
             //         -----------------------------------------------     -----------------------------------------------
-            // Middle: !     ! *MS↑* *MS←* *MS↓* *MS→* * TAB*     * INS* *LEFT* * UP * *DOWN* *RGHT* !     !
+            // Middle: !     ! *MS←* *MS↓* *MS↑* *MS→* * TAB*     * INS* *LEFT* * UP * *DOWN* *RGHT* !     !
             //         -----------------------------------------------     -----------------------------------------------
             // Bottom: ! BRW-! *LCK* *RCK* *MCK* *SCL↑**SCL↓*     *CAPS* *WD←* * DEL* * WD→* * END* ! BRW+!
             //         -----------------------------------------------     -----------------------------------------------  
