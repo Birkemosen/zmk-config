@@ -4,7 +4,7 @@ This file provides guidance to Cursor when working with code in this repository.
 
 ## Project Overview
 
-This is a ZMK (Zephyr-based Mechanical Keyboard) firmware configuration for the Piantor Pro BT keyboard (42-key split) running a Callum inspired layout with Anymak:END base layer. This configuration is based on the official Keebart repository structure with a custom Anymak:END keymap.
+This is a ZMK (Zephyr-based Mechanical Keyboard) firmware configuration for the Piantor Pro BT keyboard (42-key split) running a Callum inspired layout with Aptmak Blue base layer. This configuration is based on the official Keebart repository structure with a custom Aptmak Blue keymap optimized for multilingual typing.
 
 ## Key Commands
 
@@ -46,7 +46,7 @@ west zephyr-export
 - Mouse pointing support enabled
 
 ### Layers
-0. BASE - Anymak:END
+0. BASE - Aptmak Blue (optimized for multilingual typing)
 1. NUM - Numbers/numpad
 2. SYM - Symbol layer with danish characters
 3. NAV - Navigation
