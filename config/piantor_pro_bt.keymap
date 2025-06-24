@@ -284,6 +284,15 @@
             bindings = <&kp C_VOLUME_UP>, <&kp C_VOLUME_DOWN>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
+
+        // backspace, delete with shift
+        bspc_del: backspace_delete {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp BACKSPACE>, <&kp DELETE>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+            keep-mods = <(MOD_RSFT)>;
+        };
     };
 
     keymap {
@@ -304,7 +313,7 @@
             //        ---------------------------------------     -----------------------------------------------
             // Bottom:! GRV ! * Z * *CTL_.*ALT_,*GUI_M*  V *     * D *GUI_G*ALT_C*CTL_/* * ' * ! Play!
             //        ---------------------------------------     -----------------------------------------------
-            // Thumb:                    * GUI * *  E  * * SHF *   *CTRL* *MEH_SPC* *BSPC*
+            // Thumb:                    * GUI * *  E  * * SHF *   *CTRL* *MEH_SPC* *BSPC/DEL*
             //                           ------------------------------------
             // Note: E moved to left thumb as recommended by Aptmak Blue design
             // ------------------------------------------------------------------------------------------------------------
@@ -324,7 +333,7 @@
 
                 /* -------------------------- THUMB ROW ------------------------- */
                 &kp LGUI         &kp E                           &kp LSHFT
-                &kp LCTRL        &meh_spc LC(LA(LSHFT)) SPACE    &kp BSPC          
+                &kp LCTRL        &meh_spc LC(LA(LSHFT)) SPACE    &kp &backspace_delete          
             >;
         };
 
