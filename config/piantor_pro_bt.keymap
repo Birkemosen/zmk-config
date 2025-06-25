@@ -415,7 +415,7 @@
 
             bindings = <
                 /* TOP */
-                &kp K_REDO       &kp K_UNDO &kp K_CUT &copy &dk_paste &kp K_APP   &kp PG_UP &kp HOME &kp END &kp PG_DN &kp &del_word &trans
+                &kp K_REDO       &kp K_UNDO &kp K_CUT &copy &dk_paste &kp K_APP   &kp PG_UP &kp HOME &kp END &kp PG_DN &del_word &trans
                 /* MID */
                 &trans           &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT &kp TAB   &kp INS &kp LEFT &kp UP &kp DOWN &kp RIGHT &trans
                 /* BOT */
